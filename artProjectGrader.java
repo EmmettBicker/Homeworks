@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.xml.stream.events.StartDocument;
 
 public class artProjectGrader {
     public static void main(String[] args) 
     {
 
+        int score = 0;
         // Checking cube 
         Random r = new Random();
         int cubeRandomSize = r.nextInt(6) + 4;
@@ -51,7 +51,12 @@ public class artProjectGrader {
         normalizeArrayList(staircase1);
         normalizeArrayList(staircase3);
         normalizeArrayList(staircaseRandom);
+        normalizeArrayList(triangle1);
+        normalizeArrayList(triangle3);
+        normalizeArrayList(triangleRandom);
 
+        System.out.println("All test code complies: :)");
+        score++;
         // Cube of size 1 test
         if (cube1.size() > 1)
         {
@@ -64,6 +69,7 @@ public class artProjectGrader {
         else if (cube1.get(0).equals("#"))
         {
             System.out.println("Cube of size 1: :)");
+            score++;
         }
         else
         {
@@ -82,6 +88,7 @@ public class artProjectGrader {
         else if (cube3.get(0).equals("###") && cube3.get(1).equals("###") && cube3.get(2).equals("###"))
         {
             System.out.println("Cube of size 3: :)");
+            score++;
         }
         else
         {
@@ -115,6 +122,7 @@ public class artProjectGrader {
             if (correct)
             {
                 System.out.println("Cube of random size " + cubeRandomSize + ": :)");
+                score++;
             }
             else
             {
@@ -134,6 +142,7 @@ public class artProjectGrader {
         else if (staircase1.get(0).equals("#"))
         {
             System.out.println("Staircase of size 1: :)");
+            score++;
         }
         else if (staircase1.get(0).length() > 1)
         {
@@ -153,9 +162,10 @@ public class artProjectGrader {
         {
             System.out.println("!!Staircase of size 3: :( \n!!Your staircase doesn't have enough lines and is too short");
         }
-        else if (staircase3.get(0).equals("#"))
+        else if (staircase3.get(0).equals("  #") && staircase3.get(1).equals(" ##") && staircase3.get(2).equals("###") )
         {
             System.out.println("Staircase of size 3: :)");
+            score++;
         }
         else if (staircase3.get(0).length() > 3)
         {
@@ -163,7 +173,7 @@ public class artProjectGrader {
         }
         else
         {
-            System.out.println("Staircase of size 1: :(");
+            System.out.println("Staircase of size 3: :(");
         }
 
 
@@ -197,6 +207,7 @@ public class artProjectGrader {
             if (correct)
             {
                 System.out.println("Staircase of random size " + stairRandomSize + ": :)");
+                score++;
             }
             else
             {
@@ -216,6 +227,7 @@ public class artProjectGrader {
         else if (triangle1.get(0).equals("#"))
         {
             System.out.println("Triangle of size 1: :)");
+            score++;
         }
         else if (triangle1.get(0).length() > 1)
         {
@@ -228,27 +240,58 @@ public class artProjectGrader {
 
 
 
-        if (staircaseRandom.size() > stairRandomSize)
+        if (triangle3.size() > 3)
         {
-            System.out.println("!!Staircase of random size " + stairRandomSize + ": :( \n!!Your staircase is too many lines tall");
+            System.out.println("!!Triangle of size 3: :( \n!!Your triangle is too many lines tall");
         }
-        else if (staircaseRandom.size() < stairRandomSize)
+        else if (triangle3.size() < 3)
         {
-            System.out.println("!!Staircase of random size " + stairRandomSize + ": :( \n!!Your staircase doesn't have enough lines and is too short");
+            System.out.println("!!Triangle of size 3: :( \n!!Your triangle doesn't have enough lines and is too short");
         }
-        else if (staircaseRandom.get(0).length() > stairRandomSize)
+        else if (triangle3.get(0).equals("  #") && triangle3.get(1).equals(" ###") && triangle3.get(2).equals("#####"))
         {
-            System.out.println("!!Staircase of random size " + stairRandomSize + ": :( \n!!Your stair is too wide! Check your spaces to see if you're printing too many spaces before the staircase");
+            System.out.println("Triangle of size 3: :)");
+            score++;
         }
-        else {
-            int x = stairRandomSize;
+        else if (triangle3.get(0).equals("  #  ") && triangle3.get(1).equals(" ### ") && triangle3.get(2).equals("#####"))
+        {
+            System.out.println("Triangle of size 3: :)");
+            score++;
+        }
+        else if (triangle3.get(0).length() > 5 || (triangle3.get(1).length() > 5 || triangle3.get(2).length() > 5))
+        {
+            System.out.println("!!Triangle of size 3: :( \n!!Your staircase is too wide! Check your spaces to see if you're printing too many spaces before or after the triangle");
+        }
+        else
+        {
+            System.out.println("Triangle of size 3: :(");
+        }
+        
+
+        if (triangleRandom.size() > triangleRandomSize)
+        {
+            System.out.println("!!Triangle of random size " + triangleRandomSize + ": :( \n!!Your triangle is too many lines tall");
+        }
+        else if (triangleRandom.size() < triangleRandomSize)
+        {
+            System.out.println("!!Triangle of random size " + triangleRandomSize + ": :( \n!!Your triangle doesn't have enough lines and is too short");
+        }
+        else if (triangleRandom.get(triangleRandomSize-1).length() > triangleRandomSize * 2 - 1)
+        {
+            System.out.println("!!Triangle of random size " + triangleRandomSize + ": :( \n!!Your staircase is too wide! Check your spaces to see if you're printing too many spaces before or after the triangle");
+        }
+        else
+        {
+            int x = triangleRandomSize;
             String checkingVar = "          ";
             checkingVar += "##########";
             boolean correct = true;
-            for (int i = 1; i < stairRandomSize; i++)
+            for (int i = 1; i < triangleRandomSize+1; i++)
             {
-                
-                if (!staircaseRandom.get(i-1).equals(checkingVar.substring(10-x+i,10+i)))
+                String step = checkingVar.substring(10-x+i,10+i);
+                step += "##########".substring(0,i-1);
+       
+                if (!triangleRandom.get(i-1).equals(step))
                 {
                     correct = false;
                 }
@@ -257,13 +300,19 @@ public class artProjectGrader {
             }
             if (correct)
             {
-                System.out.println("Staircase of random size " + stairRandomSize + ": :)");
+                System.out.println("Triangle of random size " + triangleRandomSize + ": :)");
+                score++;
             }
             else
             {
-                System.out.println("!!Staircase of random size " + stairRandomSize + ": :(");
+                System.out.println("Triangle of random size " + triangleRandomSize + ": :(");
             }
+
         }
+        System.out.println();
+        System.out.println("score " + score + "/10");
+
+        
 
 
         
