@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Plurality 
+public class PluralityAnswers
 {
     /*  The RoHawks are holding an election to decide the next Captain! They're going to hold a 
     Plurality election, a type of election where every voter only gets to vote for one candidate.
